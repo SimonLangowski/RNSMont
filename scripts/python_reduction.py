@@ -557,12 +557,12 @@ def test_mulreduction(method, params, target, power=1, io=None, seeded=None):
     print(f"pass {target.bit_length()} {method.__name__} {power}")
 
 def test_a_lot():
-    for i in range(1000):
+    cpu_params_mont = Params.avx(MontgomeryReduce)
+    for i in range(10):
         seed(i)
         modbits = randint(32, 4096)
-        modulus = randint(2**modbits) # probably needs to be prime or montgomery may fail?
-        
-
+        modulus = nextprime(randint(1, 2**modbits)) # probably needs to be prime or montgomery may fail?
+        test_mulreduction(IntRNS2, cpu_params_mont, modulus, 10)
 
 if __name__ == "__main__":
     target = 0x1a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab
@@ -585,5 +585,6 @@ if __name__ == "__main__":
         p.refresh()
         test_mulreduction(BasicRNS, p, target, 10)
         test_mulreduction(IntRNS2, p, target, 10)
+    test_a_lot()
     
     
