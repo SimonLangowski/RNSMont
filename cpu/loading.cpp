@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     assert(argc > 2);
     int pow = std::atoi(argv[1]);
     PrecomputeIO io = PrecomputeIO(argv[2]);
-    auto multiplier = PYREPLACE_METHOD_NAME<PYREPLACE_REDUCTION_NAME, LIMBS1, LIMBS2, q_correct>(io);
+    auto multiplier = PYREPLACE_METHOD_NAME<PYREPLACE_REDUCTION_NAME, LIMBS1, LIMBS2>(io);
     AVXVector<LIMBS1> a1;
     AVXVector<LIMBS2> a2;
     AVXVector<LIMBS1> b1;
