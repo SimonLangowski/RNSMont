@@ -64,7 +64,7 @@ E.g using conda
 `conda install -c "nvidia/label/cuda-12.2.1" cuda-toolkit`
 
 Ensure CGBN is downloaded:
-`git submodule update --recursive`
+`git submodule update --init --recursive`
 
 Ensure you have GPU drivers, nvcc installed
 `nvidia-smi`

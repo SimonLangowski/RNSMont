@@ -292,6 +292,6 @@ def gpu_latency_plot(fn):
     plot_things(outx, outy, "modbits", "time", "latency", "Latency GPU comparison")
 
 if __name__ == "__main__":
-    # cpu_plot()
-    fn = "data/1748823599.0757022.csv"
-    gpu_latency_plot(fn)
+    cpu_plot()
+    # fn = "data/1748823599.0757022.csv"
+    # gpu_latency_plot(fn)

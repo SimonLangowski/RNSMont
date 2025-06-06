@@ -1,6 +1,6 @@
 from run_on_params import print_results, run_wrapped
 from bench_cgbn import run_cgbn_benchmark
-from gpu import run_rns_benchmark, run_rns_latency_benchmark, VECTOR
+from gpu import run_rns_latency_benchmark, VECTOR
 from create_graph import gpu_latency_plot
 
 # From the AI google
@@ -37,8 +37,8 @@ def run_latencies(func=run_cgbn_benchmark):
             word_needed += 2
             modbits -= 4
         tpi = next_power_of_2(word_needed)
-        if func == run_rns_benchmark:
-            tpi = 4
+        # if func == run_rns_benchmark:
+        #     tpi = 4
         if func == run_cgbn_benchmark:
             tpi = min(tpi, 32)
             if mod_words % tpi != 0:
@@ -60,15 +60,15 @@ def run_latencies(func=run_cgbn_benchmark):
                 args["m"] = 1
                 args["variation"] = VECTOR
                 args["stride"] = stride
-            elif func == run_rns_benchmark:
-                args['reduction-method'] = 1
+            # elif func == run_rns_benchmark:
+            #     args['reduction-method'] = 1
             
             if stride == 1 or func == run_rns_latency_benchmark:
-                if func == run_cgbn_benchmark and tpi == 1:
-                    args['variation'] == -1
-                    run_wrapped(args, results, run_rns_benchmark)
-                else:
-                    run_wrapped(args, results, func)
+                # if func == run_cgbn_benchmark and tpi == 1:
+                #     args['variation'] == -1
+                #     run_wrapped(args, results, run_rns_benchmark)
+                # else:
+                run_wrapped(args, results, func)
     
     return results
 
