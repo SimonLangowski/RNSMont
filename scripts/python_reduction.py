@@ -510,8 +510,9 @@ class IntRNS2:
         self.reducer1 = reducer(self.m1, params, io) 
         self.reducer2 = reducer(self.m2, params, io)
 
-        self.convert_to = ConvertToRNS(self.factor, self.inv_factor * self.r * self.r, target, moduli2, params, params.inbits, io)
-        self.convert_from = ConvertFromRNS(self.factor * pow(self.r, -1, self.factor2), pow(self.factor, -1, target), target, self.m2, params, params.outbits, io, False) # TODO: set to true and reduce big integer arithmetic requirement
+        io2 = False # could write conversion to file as well
+        self.convert_to = ConvertToRNS(self.factor, self.inv_factor * self.r * self.r, target, moduli2, params, params.inbits, io2)
+        self.convert_from = ConvertFromRNS(self.factor * pow(self.r, -1, self.factor2), pow(self.factor, -1, target), target, self.m2, params, params.outbits, io2, False) # TODO: set to true and reduce big integer arithmetic requirement
     
     def to_mont_avx(self, a):
         # It would be slightly more efficient to use 1 matrix, but the slicing is really annoying with AVX
