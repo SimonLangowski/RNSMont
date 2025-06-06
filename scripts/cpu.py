@@ -46,18 +46,8 @@ def create_io(method, target, io_name):
     r = method(target, params, io)
     a = randint(0, target)
     b = randint(0, target)
-    ai1 = a
-    ai2 = a
-    bi1 = b
-    bi2 = b
-    if hasattr(r, 'to_mont'):
-        ai1, ai2 = r.to_mont(a, target, False)
-        bi1, bi2, = r.to_mont(b, target, True)
-    # r.r1.test(a*b)
-    a_m1 = AVXVector(to_rns(ai1, r.m1, False))
-    a_m2 = AVXVector(to_rns(ai2, r.m2, False))
-    b_m1 = AVXVector(to_rns(bi1, r.m1, False))
-    b_m2 = AVXVector(to_rns(bi2, r.m2, False))
+    a_m1, a_m2 = r.to_mont_avx(a)
+    b_m1, b_m2 = r.to_mont_avx(b)
     io.vector(a_m1.data)
     io.vector(a_m2.data)
     io.vector(b_m1.data)
@@ -83,11 +73,7 @@ def run_and_test(method_name, target, num_mults=100, test_correct=True):
         a_m1, a_m2, b_m1, b_m2 = rns_input
         for _ in range(num_mults):
             a_m1, a_m2 = r.mulreduce(a_m1, a_m2, b_m1, b_m2)
-        c_m1 = a_m1.store()
-        c_m2 = a_m2.store()
-        if hasattr(r, 'from_mont'):
-            c_m1, c_m2 = r.from_mont(c_m1, c_m2)
-        c = rns_reconstruct_full(concat(c_m1, c_m2), concat(r.m1, r.m2))
+        c = r.from_mont_avx(a_m2.store())
         correct = ((a * pow(b, num_mults, target)) % target)
         assert(c % target == correct)
         # For comparison with c program output (could extract from pipe for full flexibility)
