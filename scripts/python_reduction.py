@@ -325,7 +325,7 @@ class RNSMatrix:
             # print("rns mat", io.write_counter, len(self.rns_matrix), len(self.rns_matrix[0].data))
             io.vector(self.shifted_quotient_estimations)
             io.vector(self.correction.data)
-            io.vector(self.target_shifted_quotient_estimations)
+            # io.vector(self.target_shifted_quotient_estimations)
             io.scalar(self.tqc)
             io.vector(self.tp.data)
 

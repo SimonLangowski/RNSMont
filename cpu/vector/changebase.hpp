@@ -23,7 +23,7 @@ class RNSMatrix {
         // printf("RNS mat %d %d %d\n", io.read_counter, in_limbs1 + in_limbs2, out_limbs);
         io.vector(shifted_quotient_estimations);
         io.read(correction);
-        io.vector(target_shifted_quotient_estimations);
+        // io.vector(target_shifted_quotient_estimations);
         io.scalar(tqc);
         io.read(tp);
     }
