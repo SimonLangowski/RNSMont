@@ -73,7 +73,7 @@ def run_and_test(method_name, target, num_mults=100, test_correct=True):
         a_m1, a_m2, b_m1, b_m2 = rns_input
         for _ in range(num_mults):
             a_m1, a_m2 = r.mulreduce(a_m1, a_m2, b_m1, b_m2)
-        c = r.from_mont_avx(a_m2.store())
+        c = r.from_mont_avx(a_m2)
         correct = ((a * pow(b, num_mults, target)) % target)
         assert(c % target == correct)
         # For comparison with c program output (could extract from pipe for full flexibility)
