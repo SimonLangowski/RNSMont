@@ -326,8 +326,8 @@ class RNSMatrix:
             io.vector(self.shifted_quotient_estimations)
             io.vector(self.correction.data)
             # io.vector(self.target_shifted_quotient_estimations)
-            io.scalar(self.tqc)
-            io.vector(self.tp.data)
+            # io.scalar(self.tqc)
+            # io.vector(self.tp.data)
 
     def rns_reduce(self, residues1, reducer, q_correct=False, acc=None):
         scalarsr = residues1.store()

@@ -24,8 +24,8 @@ class RNSMatrix {
         io.vector(shifted_quotient_estimations);
         io.read(correction);
         // io.vector(target_shifted_quotient_estimations);
-        io.scalar(tqc);
-        io.read(tp);
+        // io.scalar(tqc);
+        // io.read(tp);
     }
 
     template<int in_limbs, int offset>
